@@ -1,0 +1,18 @@
+{
+  "name": "collab",
+  "version": "1.0.0",
+  "description": "Collaboration server for editing pages.",
+  "author": "Martin Samami <martin@digitalkookie.io>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.14.0",
+    "rich-text": "^3.0.2",
+    "sharedb": "^1.0.0-beta.5",
+    "sharedb-mongo": "^1.0.0-beta.3",
+    "websocket-json-stream": "0.0.3",
+    "ws": "^1.1.1"
+  }
+}
