@@ -7,6 +7,6 @@ WORKDIR $APP_HOME
 
 # Setup app
 COPY package.json $APP_HOME
-RUN npm install
+RUN npm install && npm cache clean
 
-COPY . $APP_HOME
+ADD . $APP_HOME
