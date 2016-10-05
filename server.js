@@ -11,9 +11,12 @@ var WebSocketJSONStream = require('websocket-json-stream');
 // Set rich text as OT-type
 ShareDB.types.register(richText.type);
 
-// Setup database
-const db = ShareDBMongo(process.env.MONGO_URL);
-const backend = new ShareDB({db});
+// Setup mongo database
+const db = ShareDBMongo(process.env.MONGO_URL, {safe: true});
+const backend = new ShareDB({db: db});
+
+// Setup in-memory database
+// const backend = new ShareDB();
 
 // Start
 createDoc(startServer);
