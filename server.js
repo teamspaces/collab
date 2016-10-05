@@ -8,6 +8,7 @@ var ShareDB = require('sharedb');
 var ShareDBMongo = require('sharedb-mongo');
 var ShareDBMongo = require('sharedb-mongo');
 var ShareDBRedisPubSub = require('sharedb-redis-pubsub')
+var ShareDBLogger = require('sharedb-logger')
 var richText = require('rich-text');
 
 // Set rich text as OT-type
@@ -20,10 +21,13 @@ var db = ShareDBMongo(process.env.MONGO_URL, {safe: true});
 var pubsub = ShareDBRedisPubSub(process.env.REDIS_URL)
 
 // Setup ShareDB backend
-const backend = new ShareDB({db: db, pubsub: pubsub});
+var backend = new ShareDB({db: db, pubsub: pubsub});
+
+// Setup logger
+var logger = new ShareDBLogger(backend);
 
 // Setup in-memory database
-// const backend = new ShareDB();
+// var backend = new ShareDB();
 
 // Start
 createDoc(startServer);
