@@ -2,18 +2,25 @@
 
 var http = require('http');
 var express = require('express');
-var ShareDB = require('sharedb');
-var ShareDBMongo = require('sharedb-mongo');
-var richText = require('rich-text');
 var WebSocket = require('ws');
 var WebSocketJSONStream = require('websocket-json-stream');
+var ShareDB = require('sharedb');
+var ShareDBMongo = require('sharedb-mongo');
+var ShareDBMongo = require('sharedb-mongo');
+var ShareDBRedisPubSub = require('sharedb-redis-pubsub')
+var richText = require('rich-text');
 
 // Set rich text as OT-type
 ShareDB.types.register(richText.type);
 
 // Setup mongo database
-const db = ShareDBMongo(process.env.MONGO_URL, {safe: true});
-const backend = new ShareDB({db: db});
+var db = ShareDBMongo(process.env.MONGO_URL, {safe: true});
+
+// Setup pubsub using Redis
+var pubsub = ShareDBRedisPubSub(process.env.REDIS_URL)
+
+// Setup ShareDB backend
+const backend = new ShareDB({db: db, pubsub: pubsub});
 
 // Setup in-memory database
 // const backend = new ShareDB();
@@ -36,10 +43,8 @@ function createDoc(callback) {
 }
 
 function startServer() {
-  // Create a web server to serve files and listen to WebSocket connections
+  // Create a web server that listens to WebSocket connections
   var app = express();
-  app.use(express.static('static'));
-  app.use(express.static('node_modules/quill/dist'));
   var server = http.createServer(app);
 
   // Connect any incoming WebSocket connection to ShareDB
