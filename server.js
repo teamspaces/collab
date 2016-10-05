@@ -28,8 +28,6 @@ require('sharedb-logger')(backend)
 // Add access control
 require('sharedb-access')(backend)
 
-//
-
 // Setup document access policies
 backend.allowRead(collection_name, function(docId, doc, session){
   return true;
