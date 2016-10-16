@@ -14,7 +14,8 @@ ShareDB.types.register(richText.type);
 
 // Setup mongo database
 var db = ShareDBMongo(process.env.MONGO_URL, {safe: true});
-var collection_name = 'examples'
+var collection_name = 'realtime_pages';
+var document_id = 'example';
 
 // Setup redis pubsub
 var pubsub = ShareDBRedisPubSub(process.env.REDIS_URL)
@@ -47,11 +48,11 @@ createDoc(startServer);
 // exists at all.
 function createDoc(callback) {
   var connection = backend.connect();
-  var doc = connection.get(collection_name, 'richtext');
+  var doc = connection.get(collection_name, document_id);
   doc.fetch(function(err) {
     if (err) throw err;
     if (doc.type === null) {
-      doc.create([{insert: 'Hi!'}], 'rich-text', callback);
+      doc.create([{insert: ''}], 'rich-text', callback);
       return;
     }
     callback();
