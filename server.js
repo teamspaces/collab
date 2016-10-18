@@ -14,8 +14,7 @@ ShareDB.types.register(richText.type);
 
 // Setup mongo database
 var db = ShareDBMongo(process.env.MONGO_URL, {safe: true});
-var collection_name = 'realtime_pages';
-var document_id = 'example';
+var collection_name = 'collab_pages';
 
 // Setup redis pubsub
 var pubsub = ShareDBRedisPubSub(process.env.REDIS_URL)
@@ -37,27 +36,6 @@ backend.allowRead(collection_name, function(docId, doc, session){
 backend.allowUpdate(collection_name, function(docId, doc, session){
   return true;
 });
-
-// Start
-createDoc(startServer);
-
-// # Create initial document then fire callback
-//
-// We don't really want to do this later. Documents expect to be already
-// created in Rails app. We just need to verify that the requested document
-// exists at all.
-function createDoc(callback) {
-  var connection = backend.connect();
-  var doc = connection.get(collection_name, document_id);
-  doc.fetch(function(err) {
-    if (err) throw err;
-    if (doc.type === null) {
-      doc.create([{insert: ''}], 'rich-text', callback);
-      return;
-    }
-    callback();
-  });
-}
 
 function startServer() {
   /*
@@ -89,3 +67,5 @@ function startServer() {
   server.listen(8080);
   console.log('Listening on http://localhost:8080');
 }
+
+startServer();

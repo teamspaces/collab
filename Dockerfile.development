@@ -1,12 +1,14 @@
-FROM node:argon
+FROM node:6
 
-ENV APP_HOME=/app
+ENV APP_HOME=/app \
+    NODE_PATH=/node_modules
 
-RUN mkdir $APP_HOME
-WORKDIR $APP_HOME
+# Install gulp
+RUN npm install gulp -g \
+  && npm cache clean
 
 # Setup app
-COPY package.json $APP_HOME
-RUN npm install && npm cache clean
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
 
 ADD . $APP_HOME
