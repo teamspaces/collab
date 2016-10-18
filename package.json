@@ -5,9 +5,11 @@
   "author": "Martin Samami <martin@digitalkookie.io>",
   "repository": "https://github.com/MrTin/furrow-collab",
   "license": "gtfo",
+  "scripts": {
+    "start": "nodemon --legacy-watch --watch ./lib lib/server.js"
+  },
   "dependencies": {
     "gulp": "^3.9.1",
-    "gulp-watch": "^4.3.10",
     "require-dir": "^0.3.1",
     "express": "^4.14.0",
     "rich-text": "^3.0.2",
