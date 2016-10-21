@@ -20,7 +20,8 @@
     "sharedb-logger": "^0.1.4",
     "sharedb-mongo": "^1.0.0-beta.3",
     "sharedb-redis-pubsub": "^1.0.0-beta.1",
-    "websocket-json-stream": "0.0.3"
+    "websocket-json-stream": "0.0.3",
+    "ws": "^1.1.1"
   },
   "devDependencies": {
     "gulp-mocha": "^3.0.1",
