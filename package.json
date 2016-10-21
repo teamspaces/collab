@@ -5,21 +5,22 @@
   "author": "Martin Samami <martin@digitalkookie.io>",
   "repository": "https://github.com/MrTin/furrow-collab",
   "license": "gtfo",
+  "main": "app/index.js",
   "scripts": {
-    "start": "nodemon --legacy-watch --watch ./app app/server.js"
+    "start": "nodemon --legacy-watch --watch ./app app/index.js"
   },
   "dependencies": {
-    "gulp": "^3.9.1",
-    "require-dir": "^0.3.1",
     "express": "^4.14.0",
+    "gulp": "^3.9.1",
+    "http": "0.0.0",
+    "jsonwebtoken": "^7.1.9",
     "rich-text": "^3.0.2",
     "sharedb": "^1.0.0-beta.5",
-    "sharedb-logger": "^0.1.4",
     "sharedb-access": "^3.0.0",
+    "sharedb-logger": "^0.1.4",
     "sharedb-mongo": "^1.0.0-beta.3",
     "sharedb-redis-pubsub": "^1.0.0-beta.1",
-    "websocket-json-stream": "0.0.3",
-    "ws": "^1.1.1"
+    "websocket-json-stream": "0.0.3"
   },
   "devDependencies": {
     "gulp-mocha": "^3.0.1",
