@@ -39,4 +39,4 @@ RUN \
   && npm cache clean
 
 # Run application
-CMD node index.js
+CMD node app/index.js
