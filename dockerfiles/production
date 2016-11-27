@@ -1,0 +1,42 @@
+FROM buildpack-deps:jessie
+
+ENV APP_HOME=/app \
+    DEBIAN_FRONTEND=noninteractive \
+    DEBIAN_PRIORITY=critical \
+    DEBCONF_NOWARNINGS=yes
+
+# Import ENV needed for build process
+ARG NODE_ENV
+
+# Install build essentials
+RUN apt-get update -qq && apt-get install -y \
+    build-essential \
+  # Delete apt caches
+  && rm -rf /var/lib/apt/lists/*
+
+# Add NodeJS deb source repository
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+
+# Install dependencies
+RUN apt-get update -qq && apt-get install -y \
+    nodejs \
+  && rm -rf /var/lib/apt/lists/*
+
+# Setup app path
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
+
+# Copy app
+COPY . $APP_HOME
+
+# Build process
+RUN \
+  # Install gulp globally
+  npm install --production --global gulp \
+  # Install NPM packages
+  && npm install --production \
+  # Clean caches
+  && npm cache clean
+
+# Run application
+CMD node index.js
