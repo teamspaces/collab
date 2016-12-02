@@ -56,15 +56,18 @@ function verifyAccess(request, callback) {
 
   var payload = decodeToken(query.token);
   if(!payload) {
-    return callback('403: Invalid or expired token');
+    return callback({ code: 403,
+                   message: 'Invalid or expired token' });
   }
 
   if(collection !== payload.collection) {
-    return callback('403: not authorized to access this collection');
+    return callback({ code: 403,
+                   message: 'not authorized to access this collection' });
   }
 
   if(documentId !== payload.document_id) {
-    return callback('403: not authorized to access this document');
+    return callback({ code: 403,
+                   message: 'not authorized to access this document' });
   }
 
   callback();
