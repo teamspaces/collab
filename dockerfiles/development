@@ -7,9 +7,9 @@ ENV APP_HOME=/app \
     NODE_PATH=/node_modules
 
 # Apt cacher
-RUN /sbin/ip route | awk '/default/ { print "Acquire::http::Proxy \"http://"$3":8200\";" }' >> /etc/apt/apt.conf.d/01proxy \
- && echo 'Acquire::HTTPS::Proxy "false";' >> /etc/apt/apt.conf.d/01proxy \
- && echo 'Acquire::http::Proxy::ppa.launchpad.net DIRECT;' >> /etc/apt/apt.conf.d/01proxy
+# RUN /sbin/ip route | awk '/default/ { print "Acquire::http::Proxy \"http://"$3":8200\";" }' >> /etc/apt/apt.conf.d/01proxy \
+#  && echo 'Acquire::HTTPS::Proxy "false";' >> /etc/apt/apt.conf.d/01proxy \
+#  && echo 'Acquire::http::Proxy::ppa.launchpad.net DIRECT;' >> /etc/apt/apt.conf.d/01proxy
 
 # Get the essentials
 RUN apt-get update -qq && apt-get install -y \
