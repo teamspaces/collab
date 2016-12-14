@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Collaboration server for editing pages.",
   "author": "Martin Samami <martin@digitalkookie.io>",
-  "repository": "https://github.com/MrTin/furrow-collab",
+  "repository": "https://github.com/teamspaces/collab",
   "license": "gtfo",
   "main": "app/index.js",
   "scripts": {
