@@ -44,7 +44,8 @@ function verifyConnect(request, callback) {
   var query = url.parse(request.agent.stream.ws.upgradeReq.url, true).query;
   var payload = decodeToken(query.token);
   if(!payload) {
-    return callback('403: Invalid or expired token');
+    return callback({ code: 403,
+                   message: 'Invalid or expired token' });
   }
   callback();
 }
