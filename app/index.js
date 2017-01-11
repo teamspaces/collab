@@ -45,7 +45,7 @@ function verifyConnect(request, callback) {
   var payload = decodeToken(query.token);
   if(!payload) {
     return callback({ code: 403,
-                   message: 'Invalid or expired token' });
+                   message: 'invalid or expired token' });
   }
   callback();
 }
@@ -58,7 +58,7 @@ function verifyAccess(request, callback) {
   var payload = decodeToken(query.token);
   if(!payload) {
     return callback({ code: 403,
-                   message: 'Invalid or expired token' });
+                   message: 'invalid or expired token' });
   }
 
   if(collection !== payload.collection) {
