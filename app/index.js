@@ -17,7 +17,7 @@ var ShareDB = require('sharedb');
 var RichText = require('rich-text');
 ShareDB.types.register(RichText.type);
 
-var shareDBMongo = require('sharedb-mongo')(config.mongo_url, { safe: true });
+var shareDBMongo = require('sharedb-mongo')(config.mongodb_url, { safe: true });
 var shareDBPubSub = require('sharedb-redis-pubsub')(config.redis_url);
 var shareDB = new ShareDB({db: shareDBMongo, pubsub: shareDBPubSub});
 
