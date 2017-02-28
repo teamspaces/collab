@@ -33,9 +33,15 @@ shareDB.allowRead(config.collection, function(){ return true; });
 shareDB.allowUpdate(config.collection, function(){ return true; });
 
 var wsServer = require('ws').Server({ server: httpServer });
-wsServer.on('connection', addStreamToShareDB);
+wsServer.on('connection', function(ws, req){
+    "Client connected."
+    addStreamToShareDB(ws);
+});
+wsServer.on('close', function(ws, req){
+    console.log('Client disconnected.');
+});
 
-function addStreamToShareDB(ws, _request) {
+function addStreamToShareDB(ws) {
   var stream = new WebSocketJSONStream(ws);
   shareDB.listen(stream);
 }
