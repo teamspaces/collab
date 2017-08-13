@@ -22,7 +22,6 @@ var shareDBPubSub = require('sharedb-redis-pubsub')(config.redis_url);
 var shareDB = new ShareDB({db: shareDBMongo, pubsub: shareDBPubSub});
 
 shareDB.use(require('sharedb-logger'));
-shareDB.use('connect', verifyConnect);
 
 shareDB.use('doc', verifyAccess);
 shareDB.use('apply', verifyAccess);
@@ -44,16 +43,6 @@ wsServer.on('close', function(ws, req){
 function addStreamToShareDB(ws) {
   var stream = new WebSocketJSONStream(ws);
   shareDB.listen(stream);
-}
-
-function verifyConnect(request, callback) {
-  var query = url.parse(request.agent.stream.ws.upgradeReq.url, true).query;
-  var payload = decodeToken(query.token);
-  if(!payload) {
-    return callback({ code: 403,
-                   message: 'invalid or expired token' });
-  }
-  callback();
 }
 
 function verifyAccess(request, callback) {
