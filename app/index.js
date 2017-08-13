@@ -22,7 +22,6 @@ var shareDBPubSub = require('sharedb-redis-pubsub')(config.redis_url);
 var shareDB = new ShareDB({db: shareDBMongo, pubsub: shareDBPubSub});
 
 shareDB.use(require('sharedb-logger'));
-shareDB.use('connect', verifyConnect);
 
 shareDB.use('doc', verifyAccess);
 shareDB.use('apply', verifyAccess);
