@@ -45,16 +45,6 @@ function addStreamToShareDB(ws) {
   shareDB.listen(stream);
 }
 
-function verifyConnect(request, callback) {
-  var query = url.parse(request.agent.stream.ws.upgradeReq.url, true).query;
-  var payload = decodeToken(query.token);
-  if(!payload) {
-    return callback({ code: 403,
-                   message: 'invalid or expired token' });
-  }
-  callback();
-}
-
 function verifyAccess(request, callback) {
   var query = url.parse(request.agent.stream.ws.upgradeReq.url, true).query;
   var collection = request.collection;
