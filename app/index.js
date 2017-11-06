@@ -1,8 +1,8 @@
 'use strict';
 
 var config = require('./config/main');
-var app = require('express')();
-var httpServer = require('http').Server(app);
+var express = require('express')();
+var httpServer = require('http').Server(express);
 var url = require('url');
 var jwt = require('jsonwebtoken');
 
