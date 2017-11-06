@@ -1,15 +1,15 @@
 'use strict';
 
 var config = require('./config/main');
-var express = require('express')();
-var httpServer = require('http').Server(express);
+var app = require('express')();
+var httpServer = require('http').Server(app);
 var url = require('url');
 var jwt = require('jsonwebtoken');
 
 // Add _ping endpoint
-var router = express.Router()
-router.get('/_ping', function(request, response, next){
-  response.status(200).send('pong');
+app.get('/_ping', function(request, response, next){
+  response.status(200)
+          .send('pong');
 });
 
 httpServer.listen(config.http.port);
