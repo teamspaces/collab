@@ -6,6 +6,12 @@ var httpServer = require('http').Server(app);
 var url = require('url');
 var jwt = require('jsonwebtoken');
 
+// Add _ping endpoint
+var router = express.Router()
+router.get('/_ping', function(request, response, next){
+  response.status(200).send('pong');
+});
+
 httpServer.listen(config.http.port);
 console.log('Your server is running on port ' + config.http.port + '.');
 
