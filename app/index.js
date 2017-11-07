@@ -7,10 +7,10 @@ var url = require('url');
 var jwt = require('jsonwebtoken');
 
 // Add _ping endpoint
-// app.get('/_ping', function(req, res){
-//   res.status(200)
-//      .send('pong');
-// });
+app.get('/_ping', function(req, res){
+  res.status(200)
+     .send('pong');
+});
 
 httpServer.listen(config.http.port);
 console.log('Your server is running on port ' + config.http.port + '.');
