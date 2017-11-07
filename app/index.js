@@ -2,7 +2,7 @@
 
 var config = require('./config/main');
 var app = require('express')();
-var httpServer = require('http').Server(app);
+
 var url = require('url');
 var jwt = require('jsonwebtoken');
 
@@ -11,6 +11,8 @@ app.get('/_ping', function(req, res){
   res.status(200)
      .send('pong');
 });
+
+var httpServer = require('http').Server(app);
 
 httpServer.listen(config.http.port);
 console.log('Your server is running on port ' + config.http.port + '.');
